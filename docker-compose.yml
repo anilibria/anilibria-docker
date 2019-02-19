@@ -49,5 +49,5 @@ services:
     - 8180:8080
     depends_on:
       - mariadb
-  xbt_tracker:
-    build: ./images/xbt_tracker
+#  xbt_tracker:
+#    build: ./images/xbt_tracker
