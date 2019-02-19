@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+www/*
+mysql/
+!mysql/test
+.idea
+logs
+phpmyadmin/config/config\.secret\.inc\.php
+
+phpmyadmin/config/config\.user\.inc\.php
