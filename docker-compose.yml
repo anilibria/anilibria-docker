@@ -7,6 +7,7 @@ services:
     # используем последний стабильный образ nginx
     image: nginx:latest
     # маршрутизируем порты
+    restart: unless-stopped
     ports:
     - "80:80"
     - "443:443"
@@ -18,6 +19,7 @@ services:
   php:
     # у нас свой образ для PHP, указываем путь к нему и говорим что его надо собрать
     build: ./images/php
+    restart: unless-stopped
     # монтируем директорию с проектами
     volumes:
     - ./www:/var/www
@@ -31,7 +33,7 @@ services:
 
   mariadb:
     image: mariadb
-    restart: always
+    restart: unless-stopped
     ports:
     - 3306:3306
     environment:
@@ -44,7 +46,7 @@ services:
 
   adminer:
     image: adminer
-    restart: always
+    restart: unless-stopped
     ports:
     - 8180:8080
     depends_on:
