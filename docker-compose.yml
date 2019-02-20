@@ -36,11 +36,15 @@ services:
     restart: unless-stopped
     ports:
     - 3306:3306
+    volumes:
+    - ./mysql:/var/lib/mysql
+    - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     environment:
       PMA_ARBITRARY: 1
-      MYSQL_USERNAME: root
-      MYSQL_PASSWORD: toor
+      MYSQL_USER: anilibria
+      MYSQL_PASSWORD: anilibria
       MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: anilibria
       PMA_HOST: mariadb
       PMA_PORT: 3306
 
@@ -51,5 +55,9 @@ services:
     - 8180:8080
     depends_on:
       - mariadb
-#  xbt_tracker:
-#    build: ./images/xbt_tracker
+  xbt_tracker:
+    image: kauden/xbt_tracker:latest
+    volumes:
+      - ./images/xbt_tracker/xbt_tracker.conf:/opt/xbt_tracker/xbt_tracker.conf
+    depends_on:
+    - mariadb

@@ -1,4 +1,4 @@
 #!/bin/bash 
 
-docker down $(docker ps -q)
+docker-compose down
 docker-compose up -d --build
