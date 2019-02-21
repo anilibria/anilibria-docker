@@ -5,7 +5,7 @@ version: '3'
 services:
   nginx:
     # используем последний стабильный образ nginx
-    build: ./images/nginx
+    image: nginx:latest
     # маршрутизируем порты
     restart: unless-stopped
     ports:
