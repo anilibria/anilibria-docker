@@ -63,7 +63,7 @@ services:
     - mariadb
 
   sphinx:
-    build: ./docker-sphinxsearch
+    build: ./sphinx
     restart: unless-stopped
     depends_on:
     - mariadb
