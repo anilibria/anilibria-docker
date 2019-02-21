@@ -57,7 +57,16 @@ services:
       - mariadb
   xbt_tracker:
     image: kauden/xbt_tracker:latest
-    volumes:
-      - ./images/xbt_tracker/xbt_tracker.conf:/opt/xbt_tracker/xbt_tracker.conf
+#    volumes:
+#      - ./images/xbt_tracker/xbt_tracker.conf:/opt/xbt_tracker/xbt_tracker.conf
     depends_on:
     - mariadb
+
+  sphinx:
+    build: ./docker-sphinxsearch
+    restart: unless-stopped
+    depends_on:
+    - mariadb
+#    volumes:
+#    - ./sphinx/sphinx.conf:/etc/sphinxsearch/sphinx.conf
+#    - ./sphinxsearch:/var/lib/sphinxsearch/data
