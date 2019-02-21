@@ -15,7 +15,7 @@ ENV LANG=${OS_LOCALE} \
 	LANGUAGE=${OS_LANGUAGE} \
 	LC_ALL=${OS_LOCALE}
 
-COPY ./entrypoint.sh /sbin/entrypoint.sh
+COPY entrypoint.sh /sbin/entrypoint.sh
 
 RUN	buildDeps='software-properties-common python-software-properties' \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends \

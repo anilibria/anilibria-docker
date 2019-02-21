@@ -5,7 +5,7 @@ version: '3'
 services:
   nginx:
     # используем последний стабильный образ nginx
-    image: nginx:latest
+    build: ./images/nginx
     # маршрутизируем порты
     restart: unless-stopped
     ports:
@@ -63,7 +63,7 @@ services:
     - mariadb
 
   sphinx:
-    build: ./sphinx
+    build: images/sphinx
     restart: unless-stopped
     depends_on:
     - mariadb
