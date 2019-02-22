@@ -1,0 +1,5 @@
+version: "3"
+
+services:
+  mariadb:
+    command: ["mysqld", "--innodb_flush_method=fsync"]
