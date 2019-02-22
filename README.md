@@ -13,12 +13,9 @@
     
     127.0.0.1 anilibria.loc
 
-В папке с данным репозиторием создайте папку `www`
-и загрузите в неё репозиторий Анилибрии:
+Загрузите исходный код Анилибрии:
 
-    mkdir www
-    cd www
-    git clone https://github.com/anilibria/anilibria.git
+    git submodule update
 
 Для работы сайта необходимо добавить следующие строки в `/www/anilibria/private/config.php`:
 
