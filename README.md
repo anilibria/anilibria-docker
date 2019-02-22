@@ -15,6 +15,7 @@
 
 Загрузите исходный код Анилибрии:
 
+    git submodule init
     git submodule update
 
 Для работы сайта необходимо добавить следующие строки в `/www/anilibria/private/config.php`:
