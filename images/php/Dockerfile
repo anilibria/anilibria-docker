@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y \
         libpng-dev \
         libzip-dev \
         memcached \
+        libgeoip-dev \
+    && pecl install http://pecl.php.net/get/geoip-1.1.1.tgz \
     && service memcached start \
     && docker-php-ext-install -j$(nproc) iconv mbstring mysqli pdo_mysql zip \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -23,6 +25,10 @@ RUN apt-get update && apt-get install -y \
 
 #Сам composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN apt-get update && apt-get install -y libz-dev libmemcached-dev
+RUN pecl install memcached
+RUN echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini
 
 #Пользовательский php.ini для переопределения стандартных значений
 ADD php.ini /usr/local/etc/php/conf.d/40-custom.ini

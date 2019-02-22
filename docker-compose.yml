@@ -16,6 +16,7 @@ services:
     - ./hosts:/etc/nginx/conf.d
     - ./www:/var/www
     - ./logs:/var/log/nginx
+
   php:
     # у нас свой образ для PHP, указываем путь к нему и говорим что его надо собрать
     build: ./images/php
@@ -48,13 +49,22 @@ services:
       PMA_HOST: mariadb
       PMA_PORT: 3306
 
-  adminer:
-    image: adminer
-    restart: unless-stopped
-    ports:
-    - 8180:8080
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
     depends_on:
-      - mariadb
+    - mariadb
+    environment:
+      PMA_ARBITRARY: 1
+      MYSQL_USERNAME: anilibria
+      MYSQL_PASSWORD: anilibria
+      MYSQL_ROOT_PASSWORD: toor
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+    ports:
+    - 8080:80
+    volumes:
+    - ./phpmyadmin/config/:/etc/phpmyadmin/
+
   xbt_tracker:
     image: kauden/xbt_tracker:latest
 #    volumes:

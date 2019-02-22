@@ -2,12 +2,25 @@
 для запуска и отладки сайта https://anilibria.tv на локальной машине.
 
 На данный момент, подключены сервисы **MariaDB**, **PHP-FPM**,
-**Memcached**, **Sphinx** и **Adminer** для работы с БД
-(позднее добавлю и PhpMyAdmin и остальные, необходимые для работы с
-проектом **Anilibria**, сервисы).
+**Memcached**, **Sphinx**, **XBT-Tracker** и **PhpMyAdmin** для работы с БД
 
 
-Запуск выполняется при помощи запуска файла с bash-скриптом:
+Первым делом добавьте в ваш hosts файл адрес тестового сайта:
+
+    sudo gedit /etc/hosts
+    
+И пропишите в данном файле:
+    
+    127.0.0.1 anilibria.loc
+
+
+Для работы сайта необходимо добавить следующие строки в `/private/config.php`:
+
+    $conf['mysql_host'] = 'mariadb';
+    $conf['sphinx_host'] = 'sphinx';
+    
+
+Запустить docker-окружение можно используя bash-скрипт:
 
 `./start.sh`
 
@@ -17,6 +30,10 @@
 
 **`docker-entrypoint-initdb.d`**
 
-Доступы к mysql:
-Login: root
-Password: toor
+Доступы к mysql (и такие же к PhpMyAdmin):
+
+`Login: anilibria`
+
+`Password: anilibria`
+    
+PhpMyAdmin доступен по адресу: http://anilibria.loc:8080
