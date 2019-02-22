@@ -5,9 +5,9 @@ version: '3'
 services:
   nginx:
     # используем последний стабильный образ nginx
-    image: nginx:latest
-    # маршрутизируем порты
+    image: nginx:1.15
     restart: unless-stopped
+    # маршрутизируем порты
     ports:
     - "80:80"
     - "443:443"
@@ -26,14 +26,14 @@ services:
     - ./www:/var/www
 
   memcached:
-    image: 'bitnami/memcached:latest'
+    image: bitnami/memcached:1.5.12
     ports:
       - 11111:11211
     volumes:
       - ./memcached/memcached.conf:/etc/memcached.conf
 
   mariadb:
-    image: mariadb
+    image: mariadb:10.3
     restart: unless-stopped
     ports:
     - 3306:3306
@@ -50,7 +50,7 @@ services:
       PMA_PORT: 3306
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:4.8
     depends_on:
     - mariadb
     environment:
