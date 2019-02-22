@@ -39,7 +39,7 @@ services:
     - 3306:3306
     volumes:
     - ./mysql:/var/lib/mysql
-    - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    - ./www/sql/main.sql:/docker-entrypoint-initdb.d/01-main.sql
     environment:
       PMA_ARBITRARY: 1
       MYSQL_USER: anilibria
