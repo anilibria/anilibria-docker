@@ -5,7 +5,7 @@
 **Memcached**, **Sphinx**, **XBT-Tracker** и **PhpMyAdmin** для работы с БД
 
 
-Первым делом добавьте в ваш hosts файл адрес тестового сайта:
+Первым делом добавьте в ваш `hosts` файл адрес тестового сайта:
 
     sudo gedit /etc/hosts
     
@@ -13,8 +13,14 @@
     
     127.0.0.1 anilibria.loc
 
+В папке с данным репозиторием создайте папку `www`
+и загрузите в неё репозиторий Анилибрии:
 
-Для работы сайта необходимо добавить следующие строки в `/private/config.php`:
+    mkdir www
+    cd www
+    git clone https://github.com/anilibria/anilibria.git
+
+Для работы сайта необходимо добавить следующие строки в `/www/anilibria/private/config.php`:
 
     $conf['mysql_host'] = 'mariadb';
     $conf['sphinx_host'] = 'sphinx';
