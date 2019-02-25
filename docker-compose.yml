@@ -9,17 +9,17 @@ services:
     restart: unless-stopped
     # маршрутизируем порты
     ports:
-    - "80:80"
-    - "443:443"
+    - 80:80
+    - 443:443
     # монтируем директории, слева директории на основной машине, справа - куда они монтируются в контейнере
     volumes:
-    - ./hosts:/etc/nginx/conf.d
+    - ./services/nginx:/etc/nginx/conf.d
     - ./www:/var/www
-    - ./logs:/var/log/nginx
+    - ./data/nginx:/var/log/nginx
 
   php:
     # у нас свой образ для PHP, указываем путь к нему и говорим что его надо собрать
-    build: ./images/php
+    build: services/php
     restart: unless-stopped
     # монтируем директорию с проектами
     volumes:
@@ -30,7 +30,7 @@ services:
     ports:
       - 11111:11211
     volumes:
-      - ./memcached/memcached.conf:/etc/memcached.conf
+      - ./services/memcached/memcached.conf:/etc/memcached.conf
 
   mariadb:
     image: mariadb:10.3
@@ -38,7 +38,7 @@ services:
     ports:
     - 3306:3306
     volumes:
-    - ./mysql:/var/lib/mysql
+    - ./data/mariadb:/var/lib/mysql
     - ./www/sql/main.sql:/docker-entrypoint-initdb.d/01-main.sql
     environment:
       PMA_ARBITRARY: 1
@@ -63,7 +63,7 @@ services:
     ports:
     - 8080:80
     volumes:
-    - ./phpmyadmin/config/:/etc/phpmyadmin/
+    - ./services/phpmyadmin:/etc/phpmyadmin
 
   xbt_tracker:
     image: kauden/xbt_tracker:latest
@@ -73,7 +73,7 @@ services:
     - mariadb
 
   sphinx:
-    build: images/sphinx
+    build: services/sphinx
     restart: unless-stopped
     depends_on:
     - mariadb
