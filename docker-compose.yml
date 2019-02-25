@@ -31,6 +31,7 @@ services:
       - 11111:11211
     volumes:
       - ./services/memcached/memcached.conf:/etc/memcached.conf
+      - ./data/memcached/memcached.log:/var/log/memcached.log
 
   mariadb:
     image: mariadb:10.3
