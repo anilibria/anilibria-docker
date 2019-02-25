@@ -41,13 +41,10 @@ services:
     - ./data/mariadb:/var/lib/mysql
     - ./www/sql/main.sql:/docker-entrypoint-initdb.d/01-main.sql
     environment:
-      PMA_ARBITRARY: 1
       MYSQL_USER: anilibria
       MYSQL_PASSWORD: anilibria
       MYSQL_ROOT_PASSWORD: toor
       MYSQL_DATABASE: anilibria
-      PMA_HOST: mariadb
-      PMA_PORT: 3306
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:4.8
@@ -55,9 +52,6 @@ services:
     - mariadb
     environment:
       PMA_ARBITRARY: 1
-      MYSQL_USERNAME: anilibria
-      MYSQL_PASSWORD: anilibria
-      MYSQL_ROOT_PASSWORD: toor
       PMA_HOST: mariadb
       PMA_PORT: 3306
     ports:
