@@ -1,43 +1,54 @@
-Данный репозиторий содержит конфигурацию Docker'a
-для запуска и отладки сайта https://anilibria.tv на локальной машине.
+# Anilibria Docker
+Конфигурацию Docker'a для запуска и отладки сайта https://anilibria.tv на локальной машине.
 
-На данный момент, подключены сервисы **MariaDB**, **PHP-FPM**,
-**Memcached**, **Sphinx**, **XBT-Tracker** и **PhpMyAdmin** для работы с БД
+## Состав
+* MariaDB
+* PHP-FPM
+* Memcached
+* Sphinx
+* XBT-Tracker
+* PhpMyAdmin
 
-
-Первым делом добавьте в ваш `hosts` файл адрес тестового сайта:
-
+## Установка
+1. Добавьте в ваш `hosts` файл адрес тестового сайта:
+    ```bash
     sudo gedit /etc/hosts
-    
-И пропишите в данном файле:
-    
+    ``` 
+    И пропишите в данном файле:
+    ```
     127.0.0.1 anilibria.loc
-
-Загрузите исходный код Анилибрии:
-
+    ```
+2. Загрузите исходный код Анилибрии:
+    ```bash
     git submodule init
     git submodule update
-
-Для работы сайта необходимо добавить следующие строки в `/www/anilibria/private/config.php`:
-
+    ```
+3. Для работы сайта необходимо добавить следующие строки в `/www/anilibria/private/config.php`:
+    ```php
     $conf['mysql_host'] = 'mariadb';
     $conf['sphinx_host'] = 'sphinx';
-    
-
+    ```
+## Запуск
+Запускать можно либо стандарными способами docker'а, либо воспользовавшись скриптами для вашей ОС.
+### Linux/Mac OS
 Запустить docker-окружение можно используя bash-скрипт:
+```bash
+./start.sh
+```
 
-`./start.sh`
+### Windows
+Запустить docker-окружение можно используя batch-скрипт:
+```
+start.bat
+```
 
-Так же можно запускать и стандартными, для docker'a, способами.
+## БД
+### Доступ
+БД доступна на `localhost:3306`, либо через PhpMyAdmin http://localhost:8080/ используя пару логин пароль `anilibria`/`anilibria` либо `root`/`toor`. 
 
-Для импорта данных в бд, положите файлы импорта в папку
-
-**`docker-entrypoint-initdb.d`**
-
-Доступы к mysql (и такие же к PhpMyAdmin):
-
-`Login: anilibria`
-
-`Password: anilibria`
-    
-PhpMyAdmin доступен по адресу: http://anilibria.loc:8080
+### Первичное наполнение БД
+Для импорта данных в бд, положите файлы импорта в папку `migrations` и прокиньте их в контейнер `mariadb`:
+```yaml
+volumes:    
+    - ./migrations/example.sql:/docker-entrypoint-initdb.d/02-example.sql
+```
