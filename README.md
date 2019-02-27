@@ -21,7 +21,7 @@
 2. Загрузите исходный код Анилибрии:
     ```bash
     git submodule init
-    git submodule update
+    git submodule update --remote
     ```
 3. Для работы сайта необходимо добавить следующие строки в `/www/anilibria/private/config.php`:
     ```php
