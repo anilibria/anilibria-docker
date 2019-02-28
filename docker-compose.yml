@@ -41,6 +41,7 @@ services:
     volumes:
     - ./data/mariadb:/var/lib/mysql
     - ./www/sql/main.sql:/docker-entrypoint-initdb.d/01-main.sql
+    - ./migrations/02-create-users.sql:/docker-entrypoint-initdb.d/02-create-users.sql
     environment:
       MYSQL_USER: anilibria
       MYSQL_PASSWORD: anilibria
