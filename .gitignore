@@ -3,6 +3,7 @@ www/*
 mysql/
 !mysql/test
 .idea
+.env
 logs
 phpmyadmin/config/config\.secret\.inc\.php
 
