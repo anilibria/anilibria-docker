@@ -16,9 +16,9 @@
     ``` 
     И пропишите в данном файле:
     ```
-    127.0.0.1 anilibria.loc
+    127.0.0.1 anilibria.local
     ```
-2. Загрузите исходный код Анилибрии:
+2. При необходимости(обычно git сам подтягивает зависимости) загрузите исходный код Анилибрии:
     ```bash
     git submodule init
     git submodule update --remote
@@ -49,7 +49,7 @@ start.bat
 
 ## БД
 ### Доступ
-БД доступна на `localhost:3306`, либо через PhpMyAdmin http://localhost:8080/ используя пару логин пароль `anilibria`/`anilibria` либо `root`/`toor`. 
+БД доступна на `anilibria.local:3306`, либо через PhpMyAdmin http://anilibria.local:8080/ используя пару логин пароль `anilibria`/`anilibria` либо `root`/`toor`. 
 
 ### Первичное наполнение БД
 Для импорта данных в бд, положите файлы импорта в папку `migrations` и прокиньте их в контейнер `mariadb`:
