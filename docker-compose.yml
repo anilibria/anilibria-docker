@@ -34,10 +34,11 @@ services:
       - ./data/memcached/memcached.log:/var/log/memcached.log
 
   mariadb:
-    image: mariadb:10.3
+    build: services/mariadb
     restart: unless-stopped
     ports:
     - "${MYSQL_HOST_PORT}:3306"
+    - 2710:2710
     volumes:
     - ./data/mariadb:/var/lib/mysql
     - "${APP_HOST_PATH}/sql/main.sql:/docker-entrypoint-initdb.d/01-main.sql"
@@ -61,12 +62,13 @@ services:
     volumes:
     - ./services/phpmyadmin:/etc/phpmyadmin
 
-  xbt_tracker:
-    image: kauden/xbt_tracker:latest
-#    volumes:
-#      - ./images/xbt_tracker/xbt_tracker.conf:/opt/xbt_tracker/xbt_tracker.conf
-    depends_on:
-    - mariadb
+#  xbt_tracker:
+#    container_name: xbt_tracker
+#    build: services/xbt_tracker
+#    depends_on:
+#    - mariadb
+#    ports:
+#    - 2710:2710
 
   sphinx:
     build: services/sphinx

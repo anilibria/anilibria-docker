@@ -1,7 +1,5 @@
 FROM php:7.3-fpm
 
-MAINTAINER 'https://vk.com/ppcdsalvc' <vlp.tiberium@gmail.com>
-
 # RUN выполняет идущую за ней команду в контексте нашего образа.
 # В данном случае мы установим некоторые зависимости и модули PHP.
 # Запускаем memcached
