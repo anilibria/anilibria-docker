@@ -1,6 +1,6 @@
 FROM mariadb:10.3
 
-RUN apt-get update && apt-get install -y cmake default-libmysqlclient-dev g++ git libboost-dev make zlib1g-dev
+RUN apt-get update && apt-get install -y cmake default-libmysqlclient-dev g++ git libboost-dev make zlib1g-dev libsystemd-dev
 RUN git clone https://github.com/OlafvdSpek/xbt
 
 RUN cd xbt/Tracker && \
